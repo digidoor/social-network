@@ -3,10 +3,11 @@ const { User, Thought } = require('../models');
 module.exports = {
 	async getThoughts(req, res)
 	{
-		try 
-		{
+		try {
+			console.log("\n\nwe're in getThoughts\n\n");
 			const thoughts = await Thought.find();
-			res.json(thoughts);
+			console.log("const thoughts: ", thoughts, "\n\n");
+			return res.json(thoughts);
 		} catch (error) { res.status(500).json(error); }
 	},
 	async makeThought(req, res)
@@ -26,4 +27,4 @@ module.exports = {
 			// I don't think prev line NEEDS a return but looks weird without it
 		} catch (error) { res.status(500).json(error); }
 	}
-}
+};
