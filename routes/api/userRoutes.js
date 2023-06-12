@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
-router.get('/', async (req, res) =>
+// use the "older" controller method for the user for refernce
+router.get('/', async (req, res) => // get all users
 {
 	try
 	{
@@ -10,7 +11,7 @@ router.get('/', async (req, res) =>
 	} catch (error) { res.status(500).json(error); }
 });
 
-router.post('/', async (req, res) =>
+router.post('/', async (req, res) => // create a new user
 {
 	try
 	{
