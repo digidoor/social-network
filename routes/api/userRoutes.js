@@ -6,7 +6,9 @@ router.get('/', async (req, res) => // get all users
 {
 	try
 	{
-		const users = await User.find();
+		const users = await User.find()
+			.select('-__v')
+			.populate('thoughts');
 		res.json(users);
 	} catch (error) { res.status(500).json(error); }
 });
@@ -19,6 +21,7 @@ router.get('/:userId', async (req, res) =>
 			.select('-__v') // I think this refers to the newest version of the object
 			.populate('friends')
 			.populate('thoughts');
+			// is there a way to get reaction count on the getUsers query? yes, line 11
 		res.json(user);
 	} catch (error) { res.status(500).json(error); }
 });
