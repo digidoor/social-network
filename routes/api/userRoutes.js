@@ -15,7 +15,10 @@ router.get('/:userId', async (req, res) =>
 {
 	try
 	{
-		const user = await User.findOne({ _id: req.params.userId });
+		const user = await User.findOne({ _id: req.params.userId })
+			.select('-__v') // I think this refers to the newest version of the object
+			.populate('friends')
+			.populate('thoughts');
 		res.json(user);
 	} catch (error) { res.status(500).json(error); }
 });

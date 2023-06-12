@@ -16,6 +16,8 @@ module.exports = {
 		try
 		{
 			const thought = await Thought.findOne({ _id: req.params.thoughtId });
+			if(!thought)//this only works if we pass something of the same bit length
+				return res.status(404).json("It's never been thunk before.");//otherwise we just get a 500 server error about failure to cast to ObjectID or something
 			return res.json(thought);
 		} catch (error) { res.status(500).json(error); }
 	},
