@@ -11,6 +11,15 @@ router.get('/', async (req, res) => // get all users
 	} catch (error) { res.status(500).json(error); }
 });
 
+router.get('/:userId', async (req, res) =>
+{
+	try
+	{
+		const user = await User.findOne({ _id: req.params.userId });
+		res.json(user);
+	} catch (error) { res.status(500).json(error); }
+});
+
 router.post('/', async (req, res) => // create a new user
 {
 	try
