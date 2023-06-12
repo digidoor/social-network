@@ -3,13 +3,23 @@ const { User, Thought } = require('../models');
 module.exports = {
 	async getThoughts(req, res)
 	{
-		try {
+		try
+		{
 			console.log("\n\nwe're in getThoughts\n\n");
 			const thoughts = await Thought.find();
 			console.log("const thoughts: ", thoughts, "\n\n");
 			return res.json(thoughts);
 		} catch (error) { res.status(500).json(error); }
 	},
+	async getThought(req, res)
+	{
+		try
+		{
+			const thought = await Thought.findOne({ _id: req.params.thoughtId });
+			return res.json(thought);
+		} catch (error) { res.status(500).json(error); }
+	},
+			
 	async makeThought(req, res)
 	{
 		try
