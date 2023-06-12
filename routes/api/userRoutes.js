@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../models');
+const { User } = require('../../models');
 
 router.get('/', async (req, res) =>
 {
@@ -14,7 +14,8 @@ router.post('/:userId', async (req, res) =>
 {
 	try
 	{
-		const x = 0;
+		const user = await User.create(req.body);
+		res.json(user);
 	} catch (error) { res.status(500).json(error); }
 });
 
