@@ -28,4 +28,4 @@ const thoughtSchema = new Schema(
 
 thoughtSchema.virtual('reactionCcount').get(function() { return this.reactions.length; });
 		
-		
+module.exports = Thought;		
