@@ -51,6 +51,17 @@ router.put('/:userId', async (req, res) => // update a single user
 	} catch (error) { res.status(500).json(error); }
 });
 
+router.delete('/:userId', async (req, res) => // delete a single user
+{
+	try
+	{
+		const user = await User.findOneAndDelete({ _id: req.params.userId })
+			.select('-__v');
+		return res.json(user);
+	} catch (error) { res.status(500).json(error); }
+});
+
+
 			
 
 module.exports = router;
