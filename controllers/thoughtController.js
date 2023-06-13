@@ -52,4 +52,14 @@ module.exports = {
 			return res.json(thought);
 		} catch (error) { res.status(500).json(error); }
 	},
+	async deleteThought (req, res)
+	{
+		try
+		{
+			const thought = await Thought.findOneAndDelete({ _id: req.params.thoughtId })
+				.select('-__v');
+			
+			return res.json(thought);
+		} catch (error) { res.status(500).json(error); }
+	},
 };

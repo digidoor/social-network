@@ -7,10 +7,11 @@ const {
 	getThought,
 	makeThought,
 	updateThought,
+	deleteThought,
 } = require('../../controllers/thoughtController');
 
 router.route('/').get(getThoughts).post(makeThought);
 
-router.route('/:thoughtId').get(getThought).put(updateThought);
+router.route('/:thoughtId').get(getThought).put(updateThought).delete(deleteThought);
 
 module.exports = router;
