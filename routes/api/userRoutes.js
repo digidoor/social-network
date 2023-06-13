@@ -67,8 +67,7 @@ router.post('/:userId/friends/:friendId', async (req, res) => // add a friend to
 	{
 		const user = await User.findOneAndUpdate( 
 			{ _id: req.params.userId },
-			//{ $set: { ...userold, ...req.body } }, // this doesn't work for some reason
-			{ $addToSet: { friends: req.params.friendId } },
+			{ $addToSet: { friends: req.params.friendId } }, //only unique items with addToSet
 			{ new: true, runValidators: true },) // return the new version
 			.select('-__v');
 		
