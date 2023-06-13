@@ -38,7 +38,7 @@ module.exports = {
 			// I don't think prev line NEEDS a return but looks weird without it
 		} catch (error) { res.status(500).json(error); }
 	},
-	async updateThought (req, res)
+	async updateThought(req, res)
 	{
 		try
 		{
@@ -52,7 +52,7 @@ module.exports = {
 			return res.json(thought);
 		} catch (error) { res.status(500).json(error); }
 	},
-	async deleteThought (req, res)
+	async deleteThought(req, res)
 	{
 		try
 		{
@@ -62,4 +62,18 @@ module.exports = {
 			return res.json(thought);
 		} catch (error) { res.status(500).json(error); }
 	},
+	// async makeReaction(req, res)
+	// {
+	// 	try
+	// 	{
+	// 		const thought = await Thought.findOneAndUpdate({ _id: req.params.thoughtId },
+	// 			{ $push: { reactions: req.body } },
+	// 			{ new: true, runValidators: true })
+	// 			.select('-__v');
+
+	// 		return res.json(thought);
+	// 	} catch (error) { res.status(500).json(error); }
+	// },
+			
+
 };
