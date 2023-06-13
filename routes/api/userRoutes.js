@@ -75,4 +75,18 @@ router.post('/:userId/friends/:friendId', async (req, res) => // add a friend to
 	} catch (error) { res.status(500).json(error); }
 });
 
+router.delete('/:userId/friends/:friendId', async (req, res) => // remove friend
+{
+	try
+	{
+		const user = await User.findOneAndUpdate( 
+			{ _id: req.params.userId },
+			{ $pull: { friends: req.params.friendId } }, //only unique items with addToSet
+			{ new: true, runValidators: true },) // return the new version
+			.select('-__v');
+		
+		return res.json(user);
+	} catch (error) { res.status(500).json(error); }
+});
+
 module.exports = router;
