@@ -62,18 +62,29 @@ module.exports = {
 			return res.json(thought);
 		} catch (error) { res.status(500).json(error); }
 	},
-	// async makeReaction(req, res)
-	// {
-	// 	try
-	// 	{
-	// 		const thought = await Thought.findOneAndUpdate({ _id: req.params.thoughtId },
-	// 			{ $push: { reactions: req.body } },
-	// 			{ new: true, runValidators: true })
-	// 			.select('-__v');
+	async makeReaction(req, res)
+	{
+		try
+		{
+			const thought = await Thought.findOneAndUpdate({ _id: req.params.thoughtId },
+				{ $addToSet: { reactions: req.body } },
+				{ new: true, runValidators: true })
+				.select('-__v');
 
-	// 		return res.json(thought);
-	// 	} catch (error) { res.status(500).json(error); }
-	// },
-			
+			return res.json(thought);
+		} catch (error) { res.status(500).json(error); }
+	},
+	async deleteReaction(req, res)
+	{
+		try
+		{
+			console.log("trying to delete");
+			const thought = await Thought.findOneAndUpdate({ _id: req.params.thoughtId },
+				{ $pull: { reactions: { reactionId: req.params.reactionId } } },
+				{ new: true, runValidators: true })
+				.select('-__v');
 
+			return res.json(thought);
+		} catch (error) { res.status(500).json(error); }
+	},
 };

@@ -2,9 +2,9 @@ const { Schema, Types } = require('mongoose');
 
 const reactionSchema = new Schema(
 {
-	reactionId: {
-		type: Schema.Types.ObjectId,
-		default: () => new Types.ObjectId()
+	reactionId: { //I don't think this prop needs to exist; I think it's a mistake
+		type: Schema.Types.ObjectId, //but I don't have enough time to test it right now
+		default: () => new Types.ObjectId() //Seems better to just use the builtin _id
 	},
 	reactionBody: {
 		type: String,
