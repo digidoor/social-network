@@ -6,10 +6,11 @@ const {
 	getThoughts,
 	getThought,
 	makeThought,
+	updateThought,
 } = require('../../controllers/thoughtController');
 
 router.route('/').get(getThoughts).post(makeThought);
 
-router.route('/:thoughtId').get(getThought);
+router.route('/:thoughtId').get(getThought).put(updateThought);
 
 module.exports = router;

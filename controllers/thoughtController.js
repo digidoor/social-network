@@ -21,7 +21,6 @@ module.exports = {
 			return res.json(thought);
 		} catch (error) { res.status(500).json(error); }
 	},
-			
 	async makeThought(req, res)
 	{
 		try
@@ -38,5 +37,19 @@ module.exports = {
 			return res.json("Someone had a thought.");
 			// I don't think prev line NEEDS a return but looks weird without it
 		} catch (error) { res.status(500).json(error); }
-	}
+	},
+	async updateThought (req, res)
+	{
+		try
+		{
+			const thought = await Thought.findOneAndUpdate(
+				{ _id: req.params.thoughtId },
+				//{ $set: { ...userold, ...req.body } }, // this doesn't work for some reason
+				{ $set: req.body },
+				{ new: true, runValidators: true },) // return the new version
+				.select('-__v');
+			
+			return res.json(thought);
+		} catch (error) { res.status(500).json(error); }
+	},
 };

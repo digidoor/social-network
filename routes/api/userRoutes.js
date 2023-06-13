@@ -39,8 +39,10 @@ router.put('/:userId', async (req, res) => // update a single user
 {
 	try
 	{
+		//const userold = await User.findOne({ _id: req.params.userId });
 		const user = await User.findOneAndUpdate(
 			{ _id: req.params.userId },
+			//{ $set: { ...userold, ...req.body } }, // this doesn't work for some reason
 			{ $set: req.body },
 			{ new: true, runValidators: true },) // return the new version
 			.select('-__v');
